@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <Rebel Id="1" AGE="100" LOCATION_NAME="LOCATION" LATITUDE="123456" LONGITUDE="654987" NAME="JOSE" GENRE="MALE" traitor="0"/>
+    <Rebel Id="2" AGE="100" LOCATION_NAME="LOCATION" LATITUDE="123456" LONGITUDE="654987" NAME="JOSE" GENRE="MALE" traitor="0"/>
+    <Rebel Id="3" AGE="100" LOCATION_NAME="LOCATION" LATITUDE="123456" LONGITUDE="654987" NAME="JOSE" GENRE="MALE" traitor="0"/>
+    <Rebel Id="4" AGE="100" LOCATION_NAME="LOCATION" LATITUDE="123456" LONGITUDE="654987" NAME="JOSE" GENRE="MALE" traitor="1"/>
+
+    <Item rebel_id="1" item_type="FOOD" QUANTITY="2" />
+    <Item rebel_id="1" item_type="WATER" QUANTITY="2" />
+    <Item rebel_id="1" item_type="AMMUNITION" QUANTITY="2" />
+
+    <Item rebel_id="2" item_type="FOOD" QUANTITY="2" />
+    <Item rebel_id="2" item_type="WATER" QUANTITY="2" />
+    <Item rebel_id="2" item_type="AMMUNITION" QUANTITY="2" />
+
+    <Item rebel_id="3" item_type="FOOD" QUANTITY="2" />
+    <Item rebel_id="3" item_type="WATER" QUANTITY="2" />
+    <Item rebel_id="3" item_type="AMMUNITION" QUANTITY="2" />
+
+    <Item rebel_id="4" item_type="FOOD" QUANTITY="2" />
+    <Item rebel_id="4" item_type="WATER" QUANTITY="2" />
+    <Item rebel_id="4" item_type="AMMUNITION" QUANTITY="2" />
+
+</dataset>
