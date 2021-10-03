@@ -16,7 +16,7 @@ It's also possible to run the project using docker. To do that, just run, in the
 ```
 docker build . --tag amaurinorato/star-wars:latest
 ```
-And the run: 
+And then run: 
 ```
 docker run -p 8080:8080 amaurinorato/star-wars:latest
 ```
