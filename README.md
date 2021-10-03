@@ -11,7 +11,7 @@ After that, just access folder target and run the command: `java -jar star-wars.
 
 The project should start listening to port 8080
 
-##RUNNING WITH DOCKER
+## RUNNING WITH DOCKER
 It's also possible to run the project using docker. To do that, just run, in the root folder, the following command:
 `docker build . --tag star-wars:latest
 `
