@@ -1,0 +1,190 @@
+#LET'S CODE TEST
+
+##DESCRIPTION
+
+Test for company Let's Code. The idea is to develop a rest API that allows users to create a rebel, update rebel location, set a rebel as a traitor and exchange items between rebels.
+
+##RUNNING
+In the root folder of project, run the command: `mvn -f pom.xml clean package`
+
+After that, just access folder target and run the command: `java -jar star-wars-0.0.1-SNAPSHOT.jar`
+
+The project should start listening to port 8080
+
+##CREATING A REBEL
+To create a rebel, just call the endpoint: `localhost:8080/v1/rebels`, with http method POST.
+
+###Expected body
+`
+{
+    "name": "bla bla",
+    "age": "12",
+    "genre": "Male",
+    "location": {
+        "latitude": 123456,
+        "longitude": 654789,
+        "name": "bla bla"
+    },
+    "inventory": [
+        {
+        "itemType": "WATER",
+        "quantity": 2
+        },
+        {
+        "itemType": "AMMUNITION",
+        "quantity": 2
+        },
+        {
+        "itemType": "FOOD",
+        "quantity": 2
+        }
+    ]
+}
+`
+
+Available itemType is: WATER, AMMUNITION, FOOD and WEAPON
+
+###Curl example:
+`
+curl --location --request POST 'localhost:8080/v1/rebels' \
+--header 'Content-Type: application/json' \
+--data-raw '
+{
+    "name": "bla bla",
+    "age": "12",
+    "genre": "Male",
+    "location": {
+        "latitude": 123456,
+        "longitude": 654789,
+        "name": "bla bla"
+    },
+    "inventory": [
+        {
+            "itemType": "WATER",
+            "quantity": 2
+        },
+        {
+            "itemType": "AMMUNITION",
+            "quantity": 2
+        },
+        {
+            "itemType": "FOOD",
+            "quantity": 2
+        }
+    ]
+}'
+`
+
+##UPDATING REBEL LOCATION
+To update rebel location just call the endpoint: `localhost:8080/v1/rebels/{rebelId}/locations` with http method PATCH.
+
+You must have the rebelId which you wish to update location.
+
+###Expected body
+`
+{
+    "latitude": 4444,
+    "longitude": 5555,
+    "name": "bla foo"
+}
+`
+
+###Curl example
+`
+curl --location --request PATCH 'localhost:8080/v1/rebels/2/locations' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "latitude": 4444,
+    "longitude": 5555,
+    "name": "bla foo"
+}'
+`
+
+##INFORMING A TRAITOR REBEL
+To inform a traitor rebel, just call the endpoint `localhost:8080/v1/rebels/{rebelId}/betrayals` with http method PATCH
+
+You must have the rebelId which you wish to inform as traitor.
+
+A rebel is only marked as traitor if there is at least three calls to this endpoint
+
+This method doesn't have a body.
+
+###Curl example
+`curl --location --request PATCH 'localhost:8080/v1/rebels/1/betrayals'`
+
+##EXCHANGING ITEMS BETWEEN REBELS
+To exchange items between rebels, just call the endpoint: `localhost:8080/v1/deals` with method POST.
+
+###Expected body
+`
+{
+    "rebelSellerId": 1,
+    "sellerItems": [
+        {
+            "itemType": "WATER",
+            "quantity": 2
+        },
+        {
+            "itemType": "AMMUNITION",
+            "quantity": 2
+        },
+        {
+            "itemType": "FOOD",
+            "quantity": 2
+        }
+    ],
+    "rebelBuyerId": 2,
+    "buyerItems": [
+        {
+            "itemType": "WATER",
+            "quantity": 2
+        },
+        {
+            "itemType": "AMMUNITION",
+            "quantity": 2
+        },
+        {
+            "itemType": "FOOD",
+            "quantity": 2
+        }
+    ]
+}
+`
+
+###Curl example
+`
+curl --location --request POST 'localhost:8080/v1/deals' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "rebelSellerId": 1,
+    "sellerItems": [
+        {
+            "itemType": "WATER",
+            "quantity": 2
+        },
+        {
+            "itemType": "AMMUNITION",
+            "quantity": 2
+        },
+        {
+            "itemType": "FOOD",
+            "quantity": 2
+        }
+    ],
+    "rebelBuyerId": 2,
+    "buyerItems": [
+        {
+            "itemType": "WATER",
+            "quantity": 2
+        },
+        {
+            "itemType": "AMMUNITION",
+            "quantity": 2
+        },
+        {
+            "itemType": "FOOD",
+            "quantity": 2
+        }
+    ]
+}'
+`

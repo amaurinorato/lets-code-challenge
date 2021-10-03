@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <Rebel
+            ID ="1"
+            AGE="1"
+            GENRE="bla"
+            LATITUDE="4444"
+            LOCATION_NAME="locationUpdated"
+            LONGITUDE="4444"
+            NAME="xptop"
+    />
+    <Item
+        Id="1"
+        Item_type="AMMUNITION"
+        Quantity="1"
+        Rebel_id="1"
+    />
+</dataset>

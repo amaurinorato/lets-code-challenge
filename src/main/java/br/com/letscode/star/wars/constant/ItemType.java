@@ -1,4 +1,4 @@
-package br.com.letscode.star.wars.constants;
+package br.com.letscode.star.wars.constant;
 
 public enum ItemType {
 

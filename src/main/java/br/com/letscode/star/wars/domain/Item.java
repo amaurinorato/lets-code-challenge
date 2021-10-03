@@ -1,17 +1,17 @@
 package br.com.letscode.star.wars.domain;
 
-import br.com.letscode.star.wars.constants.ItemType;
+import br.com.letscode.star.wars.constant.ItemType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Builder
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString(exclude = "rebel")
+@EqualsAndHashCode(of = "id")
 @Entity
 @NoArgsConstructor
 public class Item {
