@@ -7,7 +7,6 @@ import br.com.letscode.star.wars.repository.ItemRepository;
 import br.com.letscode.star.wars.repository.RebelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -26,8 +25,6 @@ public class DealService {
     ItemRepository itemRepository;
 
     public List<Rebel> makeDeal(DealRequestDto dealRequestDto) {
-        //TODO create logic to exchange items
-        //TODO validate if rebels are not traitor
         Integer buyerItemsTotalPoints = sumPointsOfItems(dealRequestDto.getBuyerItems());
         Integer sellerItemsTotalPoints = sumPointsOfItems(dealRequestDto.getSellerItems());
         if (!buyerItemsTotalPoints.equals(sellerItemsTotalPoints)) {
@@ -35,15 +32,23 @@ public class DealService {
         }
         Rebel buyer = rebelRepository.findById(dealRequestDto.getRebelBuyerId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Rebel buyer was not found"));
         Rebel seller = rebelRepository.findById(dealRequestDto.getRebelSellerId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Rebel seller was not found"));
-
-        buyer.getInventory().forEach(x -> {
-            x.setRebel(seller);
-            itemRepository.save(x);
-        });
-        seller.getInventory().forEach(x -> {
-            x.setRebel(buyer);
-            itemRepository.save(x);
-        });
+        if (buyer.getTraitor() || seller.getTraitor()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Seller or buyer is a traitor. It's not allowed to make deal with a traitor");
+        }
+        buyer.getInventory().forEach(x -> dealRequestDto.getSellerItems().forEach(y -> {
+            if (y.getItemType().equals(x.getItemType())) {
+                x.setQuantity(y.getQuantity());
+                x.setRebel(seller);
+                itemRepository.save(x);
+            }
+        }));
+        seller.getInventory().forEach(x -> dealRequestDto.getBuyerItems().forEach(y -> {
+            if (y.getItemType().equals(x.getItemType())) {
+                x.setQuantity(y.getQuantity());
+                x.setRebel(buyer);
+                itemRepository.save(x);
+            }
+        }));
 
         return Arrays.asList(buyer, seller);
     }
