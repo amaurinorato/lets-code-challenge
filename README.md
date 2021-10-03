@@ -7,26 +7,28 @@ Test for company Let's Code. The idea is to develop a rest API that allows users
 ## RUNNING
 In the root folder of project, run the command: `mvn -f pom.xml clean package`
 
-After that, just access folder target and run the command: `java -jar star-wars.jar`
+After that, just access folder target and run the command: ```java -jar star-wars.jar```
 
 The project should start listening to port 8080
 
 ## RUNNING WITH DOCKER
 It's also possible to run the project using docker. To do that, just run, in the root folder, the following command:
-`docker build . --tag amaurinorato/star-wars:latest
-`
+```
+docker build . --tag amaurinorato/star-wars:latest
+```
 And the run: 
-`docker run -p 8080:8080 amaurinorato/star-wars:latest
-`
+```
+docker run -p 8080:8080 amaurinorato/star-wars:latest
+```
 
 ## SWAGGER
-Swagger documentation can be accessed through the endpoint: `http://localhost:8080/swagger-ui.html`
+Swagger documentation can be accessed through the endpoint: ```http://localhost:8080/swagger-ui.html```
 
 ## CREATING A REBEL
-To create a rebel, just call the endpoint: `localhost:8080/v1/rebels`, with http method POST.
+To create a rebel, just call the endpoint: ```localhost:8080/v1/rebels```, with http method POST.
 
 ### Expected body
-`
+```
 {
     "name": "bla bla",
     "age": "12",
@@ -51,12 +53,12 @@ To create a rebel, just call the endpoint: `localhost:8080/v1/rebels`, with http
         }
     ]
 }
-`
+```
 
 Available itemType is: WATER, AMMUNITION, FOOD and WEAPON
 
 ### Curl example:
-`
+```
 curl --location --request POST 'localhost:8080/v1/rebels' \
 --header 'Content-Type: application/json' \
 --data-raw '
@@ -84,24 +86,24 @@ curl --location --request POST 'localhost:8080/v1/rebels' \
         }
     ]
 }'
-`
+```
 
 ## UPDATING REBEL LOCATION
-To update rebel location just call the endpoint: `localhost:8080/v1/rebels/{rebelId}/locations` with http method PATCH.
+To update rebel location just call the endpoint: ```localhost:8080/v1/rebels/{rebelId}/locations``` with http method PATCH.
 
 You must have the rebelId which you wish to update location.
 
 ### Expected body
-`
+```
 {
     "latitude": 4444,
     "longitude": 5555,
     "name": "bla foo"
 }
-`
+```
 
 ### Curl example
-`
+```
 curl --location --request PATCH 'localhost:8080/v1/rebels/2/locations' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -109,10 +111,10 @@ curl --location --request PATCH 'localhost:8080/v1/rebels/2/locations' \
     "longitude": 5555,
     "name": "bla foo"
 }'
-`
+```
 
 ## INFORMING A TRAITOR REBEL
-To inform a traitor rebel, just call the endpoint `localhost:8080/v1/rebels/{rebelId}/betrayals` with http method PATCH
+To inform a traitor rebel, just call the endpoint ```localhost:8080/v1/rebels/{rebelId}/betrayals``` with http method PATCH
 
 You must have the rebelId which you wish to inform as traitor.
 
@@ -121,13 +123,13 @@ A rebel is only marked as traitor if there is at least three calls to this endpo
 This method doesn't have a body.
 
 ### Curl example
-`curl --location --request PATCH 'localhost:8080/v1/rebels/1/betrayals'`
+```curl --location --request PATCH 'localhost:8080/v1/rebels/1/betrayals'```
 
 ## EXCHANGING ITEMS BETWEEN REBELS
-To exchange items between rebels, just call the endpoint: `localhost:8080/v1/deals` with method POST.
+To exchange items between rebels, just call the endpoint: ```localhost:8080/v1/deals``` with method POST.
 
 ### Expected body
-`
+```
 {
     "rebelSellerId": 1,
     "sellerItems": [
@@ -160,10 +162,10 @@ To exchange items between rebels, just call the endpoint: `localhost:8080/v1/dea
         }
     ]
 }
-`
+```
 
 ### Curl example
-`
+```
 curl --location --request POST 'localhost:8080/v1/deals' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -198,15 +200,15 @@ curl --location --request POST 'localhost:8080/v1/deals' \
         }
     ]
 }'
-`
+```
 
 ## REPORTS
-Reports can be accessed through the endpoint `localhost:8080/v1/reports` with http method GET
+Reports can be accessed through the endpoint ```localhost:8080/v1/reports``` with http method GET
 
 This method doesn't have a body.
 
 The report endpoint will return the following body:
-`
+```
 {
     "traitorsPercentage": 25.0000,
     "rebelsPercentage": 75.0000,
@@ -226,9 +228,9 @@ The report endpoint will return the following body:
     ],
     "lostPointsDueTraitors": 6
 }
-`
+```
 
 ### Curl Example
-`
+```
 curl --location --request GET 'localhost:8080/v1/reports'
-`
+```
