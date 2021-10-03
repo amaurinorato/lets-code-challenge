@@ -13,11 +13,14 @@ The project should start listening to port 8080
 
 ## RUNNING WITH DOCKER
 It's also possible to run the project using docker. To do that, just run, in the root folder, the following command:
-`docker build . --tag star-wars:latest
+`docker build . --tag amaurinorato/star-wars:latest
 `
 And the run: 
-`docker run -p 8080:8080 star-wars
+`docker run -p 8080:8080 amaurinorato/star-wars:latest
 `
+
+## SWAGGER
+Swagger documentation can be accessed through the endpoint: `http://localhost:8080/swagger-ui.html`
 
 ## CREATING A REBEL
 To create a rebel, just call the endpoint: `localhost:8080/v1/rebels`, with http method POST.
@@ -195,4 +198,37 @@ curl --location --request POST 'localhost:8080/v1/deals' \
         }
     ]
 }'
+`
+
+## REPORTS
+Reports can be accessed through the endpoint `localhost:8080/v1/reports` with http method GET
+
+This method doesn't have a body.
+
+The report endpoint will return the following body:
+`
+{
+    "traitorsPercentage": 25.0000,
+    "rebelsPercentage": 75.0000,
+    "averageResources": [
+        {
+            "itemType": "AMMUNITION",
+            "averagePerRebel": 2.0000
+        },
+        {
+            "itemType": "WATER",
+            "averagePerRebel": 2.0000
+        },
+        {
+            "itemType": "FOOD",
+            "averagePerRebel": 2.0000
+        }
+    ],
+    "lostPointsDueTraitors": 6
+}
+`
+
+### Curl Example
+`
+curl --location --request GET 'localhost:8080/v1/reports'
 `
