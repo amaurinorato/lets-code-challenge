@@ -88,6 +88,7 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<finalName>star-wars</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

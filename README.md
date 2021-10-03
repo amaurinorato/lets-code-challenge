@@ -1,20 +1,28 @@
-#LET'S CODE TEST
+# LET'S CODE TEST
 
-##DESCRIPTION
+## DESCRIPTION
 
 Test for company Let's Code. The idea is to develop a rest API that allows users to create a rebel, update rebel location, set a rebel as a traitor and exchange items between rebels.
 
-##RUNNING
+## RUNNING
 In the root folder of project, run the command: `mvn -f pom.xml clean package`
 
-After that, just access folder target and run the command: `java -jar star-wars-0.0.1-SNAPSHOT.jar`
+After that, just access folder target and run the command: `java -jar star-wars.jar`
 
 The project should start listening to port 8080
 
-##CREATING A REBEL
+##RUNNING WITH DOCKER
+It's also possible to run the project using docker. To do that, just run, in the root folder, the following command:
+`docker build . --tag star-wars:latest
+`
+And the run: 
+`docker run -p 8080:8080 star-wars
+`
+
+## CREATING A REBEL
 To create a rebel, just call the endpoint: `localhost:8080/v1/rebels`, with http method POST.
 
-###Expected body
+### Expected body
 `
 {
     "name": "bla bla",
@@ -44,7 +52,7 @@ To create a rebel, just call the endpoint: `localhost:8080/v1/rebels`, with http
 
 Available itemType is: WATER, AMMUNITION, FOOD and WEAPON
 
-###Curl example:
+### Curl example:
 `
 curl --location --request POST 'localhost:8080/v1/rebels' \
 --header 'Content-Type: application/json' \
@@ -75,12 +83,12 @@ curl --location --request POST 'localhost:8080/v1/rebels' \
 }'
 `
 
-##UPDATING REBEL LOCATION
+## UPDATING REBEL LOCATION
 To update rebel location just call the endpoint: `localhost:8080/v1/rebels/{rebelId}/locations` with http method PATCH.
 
 You must have the rebelId which you wish to update location.
 
-###Expected body
+### Expected body
 `
 {
     "latitude": 4444,
@@ -89,7 +97,7 @@ You must have the rebelId which you wish to update location.
 }
 `
 
-###Curl example
+### Curl example
 `
 curl --location --request PATCH 'localhost:8080/v1/rebels/2/locations' \
 --header 'Content-Type: application/json' \
@@ -100,7 +108,7 @@ curl --location --request PATCH 'localhost:8080/v1/rebels/2/locations' \
 }'
 `
 
-##INFORMING A TRAITOR REBEL
+## INFORMING A TRAITOR REBEL
 To inform a traitor rebel, just call the endpoint `localhost:8080/v1/rebels/{rebelId}/betrayals` with http method PATCH
 
 You must have the rebelId which you wish to inform as traitor.
@@ -109,13 +117,13 @@ A rebel is only marked as traitor if there is at least three calls to this endpo
 
 This method doesn't have a body.
 
-###Curl example
+### Curl example
 `curl --location --request PATCH 'localhost:8080/v1/rebels/1/betrayals'`
 
-##EXCHANGING ITEMS BETWEEN REBELS
+## EXCHANGING ITEMS BETWEEN REBELS
 To exchange items between rebels, just call the endpoint: `localhost:8080/v1/deals` with method POST.
 
-###Expected body
+### Expected body
 `
 {
     "rebelSellerId": 1,
@@ -151,7 +159,7 @@ To exchange items between rebels, just call the endpoint: `localhost:8080/v1/dea
 }
 `
 
-###Curl example
+### Curl example
 `
 curl --location --request POST 'localhost:8080/v1/deals' \
 --header 'Content-Type: application/json' \
